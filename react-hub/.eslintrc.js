@@ -19,7 +19,7 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   rules: {
-    // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
     // e.g. "@typescript-eslint/explicit-function-return-type": "off",
+    '@typescript-eslint/explicit-module-boundary-types': 'off', //禁用函数必须有返回规则
   },
 };
