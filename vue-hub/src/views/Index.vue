@@ -6,22 +6,20 @@
     </a-layout-sider>
     <a-layout>
       <a-layout-header style="background: #fff; padding: 0">
-        <a-icon
-          class="trigger"
-          :type="collapsed ? 'menu-unfold' : 'menu-fold'"
-          @click="()=> collapsed = !collapsed"
-        />
+        <a-icon class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="() => (collapsed = !collapsed)" />
       </a-layout-header>
-      <a-layout-content  class="padding-10-px height-100-per width-100-per overflow">
-        <router-view></router-view>
+      <a-layout-content class="padding-10-px height-100-per width-100-per overflow">
+        <div class="page-main">
+          <router-view></router-view>
+        </div>
       </a-layout-content>
     </a-layout>
   </a-layout>
 </template>
 
 <script>
-  import {Layout, Icon} from 'ant-design-vue'
-  import PublicMenu from "../components/PublicMenu";
+  import { Layout, Icon } from 'ant-design-vue'
+  import PublicMenu from '../components/PublicMenu'
 
   export default {
     name: 'Index',
@@ -34,15 +32,15 @@
       ALayoutHeader: Layout.Header,
       ALayoutContent: Layout.Content,
       ALayoutSider: Layout.Sider,
-      AIcon: Icon,
+      AIcon: Icon
     },
     data() {
       return {
         // 该注释为package.json的eslintConfig下extends内容
         // "eslint:recommended"
-        collapsed: false,
+        collapsed: false
       }
-    },
+    }
   }
 </script>
 

@@ -1,13 +1,13 @@
 <template>
-  <div class="width-100-per height-100-per layout-front bg-color-white padding-10-px">
-    <div class="height-100-per layout-left-top width-100-per border overflow padding-10-px" v-if="showMenu">
+  <div class="width-100-per height-100-per">
+    <div class="height-100-per layout-left-top width-100-per overflow" v-if="showMenu">
       <a-button class="margin-right-10-px" type="primary" @click="checkCalendar">日历</a-button>
       <a-button class="margin-right-10-px" type="primary" @click="checkChess">#字棋</a-button>
     </div>
 
     <div class="height-100-per width-100-per border overflow layout-front" v-else>
       <div style="height: 40px" class="width-100-per">
-        <a-icon class="trigger" type="rollback" @click="backDemo"/>
+        <a-icon class="trigger" type="rollback" @click="backDemo" />
       </div>
       <div style="height: calc(100% - 50px)" class="width-100-per overflow">
         <router-view></router-view>
@@ -17,34 +17,34 @@
 </template>
 
 <script>
-  import {Button, Icon} from 'ant-design-vue'
+  import { Button, Icon } from 'ant-design-vue'
 
   export default {
-    name: "Index",
+    name: 'Index',
     components: {
       AButton: Button,
-      AIcon: Icon,
+      AIcon: Icon
     },
     data() {
       return {
-        showMenu: true,
+        showMenu: true
       }
     },
     methods: {
       //日历
       checkCalendar() {
-        this.$router.push('/calendar');
-        this.showMenu = false;
+        this.$router.push('/calendar')
+        this.showMenu = false
       },
       //#字棋
-      checkChess(){
-        this.$router.push('/chess');
-        this.showMenu = false;
+      checkChess() {
+        this.$router.push('/chess')
+        this.showMenu = false
       },
       //返回
       backDemo() {
-        this.$router.push('/demo1');
-        this.showMenu = true;
+        this.$router.push('/demo1')
+        this.showMenu = true
       }
     }
   }
