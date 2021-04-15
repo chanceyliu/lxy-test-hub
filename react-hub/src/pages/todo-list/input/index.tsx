@@ -1,4 +1,5 @@
-import { FC, useRef } from "react";
+import { FC, useContext, useRef } from "react";
+import { ThemeContext } from "../../../components/app-context";
 import { ITodo } from "../typings";
 
 interface IProps {
@@ -8,6 +9,8 @@ interface IProps {
 
 const TdInput: FC<IProps> = ({ todoList, addTodo }) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const { theme } = useContext(ThemeContext);
+  console.log(theme, "-------++++++");
 
   const addItem = () => {
     const val = inputRef.current?.value.trim();
