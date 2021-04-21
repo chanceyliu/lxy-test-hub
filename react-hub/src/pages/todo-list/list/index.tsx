@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { ITodo } from "../typings";
+import styles from "./index.module.css";
 
 interface IProps {
   todoList: ITodo[];
@@ -13,7 +14,7 @@ const TdList: FC<IProps> = ({ todoList, removeTodo }) => {
   };
 
   return (
-    <ul>
+    <ul className={styles.bg}>
       {todoList.map((item) => {
         return (
           <li key={item.id} onClick={() => removeItem(item)}>

@@ -1,7 +1,8 @@
-import React, { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import TdInput from "./input";
 import TdList from "./list";
 import { ITodo } from "./typings";
+import { ThemeContext } from "@/components/app-context";
 
 function useTodo() {
   const [todoList, setTodoList] = useState<ITodo[]>([]);
@@ -35,10 +36,10 @@ const TodoList: FC = () => {
   const { todoList, addTodo, removeTodo } = useTodo();
 
   return (
-    <div>
+    <ThemeContext.Provider value={{ theme: "BIG" }}>
       <TdInput todoList={todoList} addTodo={addTodo}></TdInput>
       <TdList todoList={todoList} removeTodo={removeTodo}></TdList>
-    </div>
+    </ThemeContext.Provider>
   );
 };
 

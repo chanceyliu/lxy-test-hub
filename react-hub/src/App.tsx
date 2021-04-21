@@ -1,7 +1,8 @@
-import { Button } from "antd";
 import "./App.css";
-import TodoList from "./components/todo-list";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { routes } from "./router/index";
+import { Suspense } from "react";
+import { Spin } from "antd";
 
 function App() {
   return (
@@ -9,25 +10,26 @@ function App() {
       <div>
         <nav>
           <ul>
-            <li>
-              <Link to="/">主页</Link>
-            </li>
-            <li>
-              <Link to="/todo-list">TodoList</Link>
-            </li>
-            <li>
-              <Link to="/test">test</Link>
-            </li>
+            {routes.map((item) => (
+              <li key={item.path}>
+                <Link to={item.path}>{item.name}</Link>
+              </li>
+            ))}
           </ul>
         </nav>
       </div>
+      <Suspense fallback={<Spin></Spin>}>
+        <Switch>
+          {routes.map((item) => (
+            <Route
+              key={item.path}
+              path={item.path}
+              component={item.component}
+            />
+          ))}
+        </Switch>
+      </Suspense>
     </Router>
-    // <ThemeContext.Provider value={{ theme }}>
-    //   <TodoList></TodoList>
-    //   <Button type="primary" ghost onClick={() => setTheme("改变context值")}>
-    //     测试
-    //   </Button>
-    // </ThemeContext.Provider>
   );
 }
 
