@@ -1,30 +1,39 @@
-import { ThemeContext } from "@/components/app-context";
-import { Button, Input, Space } from "antd";
-import { FC, useContext, useState } from "react";
-import { ITodo } from "../typings";
+import { ThemeContext } from '@/components/app-context'
+import { Button, Input, Space } from 'antd'
+import { FC, useCallback, useContext, useEffect, useState } from 'react'
+import { ITodo } from '../typings'
 
 interface IProps {
-  todoList: ITodo[];
-  addTodo: (todo: ITodo) => void;
+  todoList: ITodo[]
+  addTodo: (todo: ITodo) => void
 }
 
 const TdInput: FC<IProps> = ({ todoList, addTodo }) => {
-  const [inputValue, setInputValue] = useState<string>("");
-  const { theme } = useContext(ThemeContext);
+  const [inputValue, setInputValue] = useState<string>('')
+  const { theme } = useContext(ThemeContext)
 
-  console.log(theme);
+  console.log(theme)
 
   const addItem = () => {
-    const val = inputValue.trim();
+    const val = inputValue.trim()
     if (val?.length) {
       addTodo({
         id: new Date().getTime(),
         content: val,
         completed: false,
-      });
+      })
     }
-    setInputValue("");
-  };
+    setInputValue('')
+  }
+
+  const test = useCallback(() => {
+    const a = theme
+    console.log(a)
+  }, [])
+
+  useEffect(() => {
+    test()
+  }, [test])
 
   return (
     <Space>
@@ -37,7 +46,7 @@ const TdInput: FC<IProps> = ({ todoList, addTodo }) => {
       />
       <Button onClick={addItem}>增加</Button>
     </Space>
-  );
-};
+  )
+}
 
-export default TdInput;
+export default TdInput

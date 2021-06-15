@@ -1,0 +1,12 @@
+build/
+dist/
+public
+**/*.md
+**/*.svg
+**/*.ejs
+**/*.html
+.gitignore
+.prettierignore
+yarn.lock
+yarn-error.log
+package-lock.json

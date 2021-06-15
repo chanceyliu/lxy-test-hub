@@ -1,8 +1,8 @@
-import "./App.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { routes } from "./router/index";
-import { Suspense } from "react";
-import { Spin } from "antd";
+import './App.css'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { routes } from './router/index'
+import { Suspense } from 'react'
+import { Spin } from 'antd'
 
 function App() {
   return (
@@ -21,16 +21,12 @@ function App() {
       <Suspense fallback={<Spin></Spin>}>
         <Switch>
           {routes.map((item) => (
-            <Route
-              key={item.path}
-              path={item.path}
-              component={item.component}
-            />
+            <Route key={item.path} path={item.path} component={item.component} />
           ))}
         </Switch>
       </Suspense>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App
