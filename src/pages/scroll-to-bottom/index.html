@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      id="wx"
+      style="width: 200px; height: 200px; background-color: darkcyan"
+    ></div>
+    <div
+      id="qq"
+      style="width: 200px; height: 200px; background-color: darksalmon"
+    ></div>
+    <script>
+      //节流
+      (function () {
+        let count = 1;
+        let dom = document.getElementById("qq");
+        function getAdd(e) {
+          dom.innerHTML = count++;
+        }
+        function throttle(func, wait) {
+          let timeout;
+          let initTime = 0;
+
+          let later = () => {
+            initTime = +new Date();
+            timeout = null;
+            func();
+          };
+
+          let throttled = () => {
+            let now = +new Date();
+            let remaining = wait - (now - initTime);
+            if (remaining <= 0 || remaining > wait) {
+              if (timeout) {
+                clearTimeout(timeout);
+                timeout = null;
+              }
+              initTime = now;
+              func();
+            } else if (!timeout) {
+              timeout = setTimeout(later, remaining);
+            }
+          };
+          return throttled;
+        }
+
+        // function throttle(func, wait) {
+        //   let timer;
+        //   return () => {
+        //     if (!timer) {
+        //       timer = setTimeout(() => {
+        //         timer = null;
+        //         func();
+        //       }, wait);
+        //     }
+        //   };
+        // }
+
+        dom.onmousemove = throttle(getAdd, 2000);
+      })();
+      //防抖
+      (function () {
+        let count = 1;
+        let dom = document.getElementById("wx");
+        const getAdd = () => {
+          dom.innerHTML = count++;
+        };
+        const debounce = (func, wait) => {
+          let timer;
+          return () => {
+            clearTimeout(timer);
+            timer = setTimeout(func, wait);
+          };
+        };
+        dom.onmousemove = debounce(getAdd, 1000);
+      })();
+    </script>
+  </body>
+</html>
