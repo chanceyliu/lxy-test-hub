@@ -12,12 +12,7 @@ export const routes = [
     component: lazy(() => import("../pages/scroll-to-bottom/index")),
   },
   {
-    name: "主题决定颜色",
-    path: "/theme-decide-color",
-    component: lazy(() => import("../pages/theme-decide-color/index")),
-  },
-  {
-    name: "测试",
+    name: "文字颜色测试",
     path: "/theme-color",
     component: lazy(() => import("../pages/theme-color/index")),
   },
