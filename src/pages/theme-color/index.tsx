@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect } from "react";
+import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import defaultBackground from "../../assets/default-background.png";
 import defaultLoginBg from "../../assets/default-login-bg.png";
 import testLogin from "../../assets/test-login.jpeg";
@@ -17,20 +17,27 @@ const colorList = [
 ];
 
 const Index: FC = () => {
-  // const getImgPalette = useCallback(async () => {
-  //   const palette = await getPalette({ imgSrc: defaultLoginBg });
-  //   const color = await getColor({ imgSrc: defaultLoginBg });
-  //   const text = await getImgContrast({ imgSrc: defaultLoginBg });
-  //   console.log(palette, "-", color, "-", text);
-  // }, []);
+  const [palette, setPalette] = useState<Number[][]>();
 
-  // useEffect(() => {
-  //   getImgPalette();
-  // }, [getImgPalette]);
+  const getImgPalette = useCallback(async () => {
+    const res = await getPalette({ imgSrc: testLogin });
+    setPalette(res);
+  }, []);
+
+  useEffect(() => {
+    getImgPalette();
+  }, [getImgPalette]);
+
+  const rgbList = useMemo(() => {
+    if (palette?.length) {
+      return palette.map((item) => `rgb(${item.join(",")})`);
+    }
+    return [];
+  }, [palette]);
 
   return (
     <div style={{ width: "100%", height: "100%" }}>
-      <Row gutter={[8, 8]}>
+      <Row gutter={[8, 8]} style={{ marginBottom: "20px" }}>
         {colorList.map((item, index) => {
           const textColor = getColorContrast(item);
           return (
@@ -49,6 +56,39 @@ const Index: FC = () => {
             </Col>
           );
         })}
+      </Row>
+
+      <Row gutter={[8, 8]}>
+        <Col span={18}>
+          <div
+            style={{
+              height: "500px",
+              backgroundImage: `url(${testLogin})`,
+              backgroundSize: "100% 100%",
+            }}
+          ></div>
+        </Col>
+        <Col span={6}>
+          <div>
+            {rgbList?.length
+              ? rgbList.map((item) => {
+                  return (
+                    <div
+                      style={{
+                        height: "50px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        background: item,
+                      }}
+                    >
+                      {item}
+                    </div>
+                  );
+                })
+              : null}
+          </div>
+        </Col>
       </Row>
     </div>
   );
